@@ -16,7 +16,7 @@ class CreateCustomerColumns extends Migration
         $model = config('razorpay.model');
         $table = (new $model)->getTable();
         Schema::connection(config('razorpay.db_connection'))->table($table, function (Blueprint $table) {
-            $table->string('razorpay_id')->nullable()->index();
+            $table->string('razorpay_customer_id')->nullable()->index();
         });
     }
 

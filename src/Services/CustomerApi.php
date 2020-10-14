@@ -9,6 +9,12 @@ class CustomerApi extends RazorpayApi
         return $this->api->customer->create($array);
     }
 
+    public function editCustomer($id, $array)
+    {
+        $this->api->customer->id = $id;
+        return $this->api->customer->edit($array);
+    }
+
     public function getCustomer($id)
     {
         return $this->api->customer->fetch($id);

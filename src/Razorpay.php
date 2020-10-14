@@ -2,12 +2,6 @@
 
 namespace Samsin33\Razorpay;
 
-use Money\Currencies\ISOCurrencies;
-use Money\Currency;
-use Money\Formatter\IntlMoneyFormatter;
-use Money\Money;
-use NumberFormatter;
-
 class Razorpay
 {
     /**
@@ -66,7 +60,7 @@ class Razorpay
 
         $model = config('razorpay.model');
 
-        return (new $model)->where('razorpay_id', $razorpay_id)->first();
+        return (new $model)->where('razorpay_customer_id', $razorpay_id)->first();
     }
 
     /**
@@ -92,30 +86,6 @@ class Razorpay
     public static function formatCurrencyUsing(callable $callback)
     {
         static::$formatCurrencyUsing = $callback;
-    }
-
-    /**
-     * Format the given amount into a displayable currency.
-     *
-     * @param int $amount
-     * @param string|null $currency
-     * @param string|null $locale
-     * @return string
-     */
-    public static function formatAmount($amount, $currency = null, $locale = null)
-    {
-        if (static::$formatCurrencyUsing) {
-            return call_user_func(static::$formatCurrencyUsing, $amount, $currency);
-        }
-
-        $money = new Money($amount, new Currency(strtoupper($currency ?? config('razorpay.currency'))));
-
-        $locale = $locale ?? config('razorpay.currency_locale');
-
-        $numberFormatter = new NumberFormatter($locale, NumberFormatter::CURRENCY);
-        $moneyFormatter = new IntlMoneyFormatter($numberFormatter, new ISOCurrencies());
-
-        return $moneyFormatter->format($money);
     }
 
     /**

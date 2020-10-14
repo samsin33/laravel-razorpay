@@ -3,11 +3,10 @@
 namespace Samsin33\Razorpay\Providers;
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\ServiceProvider;
 use Samsin33\Razorpay\Razorpay;
-use Samsin33\Razorpay\Logger;
-use Razorpay\Util\LoggerInterface;
 
-class RazorpayServiceProvider
+class RazorpayServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap any package services.
@@ -16,7 +15,6 @@ class RazorpayServiceProvider
      */
     public function boot()
     {
-        $this->registerLogger();
         $this->registerRoutes();
         $this->registerResources();
         $this->registerMigrations();
@@ -31,7 +29,6 @@ class RazorpayServiceProvider
     public function register()
     {
         $this->configure();
-        $this->bindLogger();
     }
 
     /**
@@ -44,32 +41,6 @@ class RazorpayServiceProvider
         $this->mergeConfigFrom(
             __DIR__.'/../config/razorpay.php', 'razorpay'
         );
-    }
-
-    /**
-     * Bind the Razorpay logger interface to the Razorpay logger.
-     *
-     * @return void
-     */
-    protected function bindLogger()
-    {
-        $this->app->bind(LoggerInterface::class, function ($app) {
-            return new Logger(
-                $app->make('log')->channel(config('razorpay.logger'))
-            );
-        });
-    }
-
-    /**
-     * Register the Razorpay logger.
-     *
-     * @return void
-     */
-    protected function registerLogger()
-    {
-        if (config('razorpay.logger')) {
-            Razorpay::setLogger($this->app->make(LoggerInterface::class));
-        }
     }
 
     /**

@@ -83,7 +83,7 @@ return [
     |
     */
 
-    'currency' => env('RAZORPAY_CURRENCY', 'inr'),
+    'currency' => env('RAZORPAY_CURRENCY', 'INR'),
 
     /*
     |--------------------------------------------------------------------------
