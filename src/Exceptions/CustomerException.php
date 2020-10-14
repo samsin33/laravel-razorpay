@@ -25,6 +25,6 @@ class CustomerException extends Exception
      */
     public static function notYetCreated($owner)
     {
-        return new static(class_basename($owner).' is not a Razorpay customer yet. See the createAsRazorpayCustomer method.');
+        return new static(class_basename($owner).' is not a Razorpay customer yet. See the createRazorpayCustomer method.');
     }
 }
