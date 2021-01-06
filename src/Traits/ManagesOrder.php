@@ -8,8 +8,43 @@ use Samsin33\Razorpay\Services\OrderApi;
 
 trait ManagesOrder
 {
+    protected $customer_id_field = 'customer_id';
+
     /**
-     * Retrieve the Razorpay customer ID.
+     * Retrieve the customer ID field name from your orders table.
+     *
+     * @return string
+     */
+    public function getCustomerIdField(): string
+    {
+        return $this->customer_id_field;
+    }
+
+    /**
+     * Set the customer ID field name if not "customer_id" from your orders table.
+     *
+     * @param string $customer_id_field
+     * @return bool
+     */
+    public function setCustomerIdField(string $customer_id_field)
+    {
+        $this->customer_id_field = $customer_id_field;
+        return true;
+    }
+
+    /**
+     * Retrieve the customer ID from your orders table which will be the foreign key references customers table.
+     *
+     * @return string|null
+     */
+    public function customerId()
+    {
+        $customer_id_field = $this->getCustomerIdField();
+        return $this->{$customer_id_field};
+    }
+
+    /**
+     * Retrieve the Razorpay order ID.
      *
      * @return string|null
      */
@@ -19,7 +54,7 @@ trait ManagesOrder
     }
 
     /**
-     * Determine if the entity has a Razorpay customer ID.
+     * Determine if the entity has a Razorpay order ID.
      *
      * @return bool
      */
@@ -35,11 +70,11 @@ trait ManagesOrder
      */
     public function getCurrency()
     {
-        return $this->currency ?? config('razorpay.currency');
+        return isset($this->currency) && !empty($this->currency) ? $this->currency : config('razorpay.currency');
     }
 
     /**
-     * Create a Razorpay customer for the given model.
+     * Create a Razorpay order for the given object.
      *
      * @param  array  $options
      * @return OrderApi
@@ -61,21 +96,21 @@ trait ManagesOrder
             $options['currency'] = $this->getCurrency();
         }
 
-        // Here we will create the customer instance on Razorpay and store the ID of the
-        // user from Razorpay. This ID will correspond with the Razorpay user instances
-        // and allow us to retrieve users from Razorpay later when we need to work.
+        // Here we will create the order instance on Razorpay and store the ID of the
+        // order from Razorpay. This ID will correspond with the Razorpay order instances
+        // and allow us to retrieve orders from Razorpay later when we need to work.
         $api = new OrderApi();
         $order = $api->createOrder($options);
 
         $this->razorpay_order_id = $order->id;
 
-        $this->save();
+        $this->saveRecord($this);
 
         return $order;
     }
 
     /**
-     * Create a Razorpay customer for the given model.
+     * Get a Razorpay order for the given object.
      *
      * @return OrderApi
      *
@@ -92,7 +127,7 @@ trait ManagesOrder
     }
 
     /**
-     * Create a Razorpay customer for the given model.
+     * Get a Razorpay payments for the given order.
      *
      * @return OrderApi
      *

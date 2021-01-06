@@ -3,10 +3,10 @@
 namespace Samsin33\Razorpay;
 
 use Samsin33\Razorpay\Traits\CommonTrait;
-use Samsin33\Razorpay\Traits\ManagesCustomer;
+use Samsin33\Razorpay\Traits\ManagesOrder;
 
-trait Billable
+trait Orderable
 {
     use CommonTrait;
-    use ManagesCustomer;
+    use ManagesOrder;
 }

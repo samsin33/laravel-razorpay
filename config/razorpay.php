@@ -74,6 +74,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Razorpay Model
+    |--------------------------------------------------------------------------
+    |
+    | This is the model in your application that implements the Orderable trait
+    | provided by Razorpay. It will serve as the primary model which will save
+    | information regarding orders.
+    |
+    */
+
+    'order_model' => env('RAZORPAY_ORDER_MODEL', App\Models\Order::class),
+
+    /*
+    |--------------------------------------------------------------------------
     | Currency
     |--------------------------------------------------------------------------
     |

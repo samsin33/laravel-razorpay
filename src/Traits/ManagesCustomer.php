@@ -77,7 +77,7 @@ trait ManagesCustomer
 
         $this->razorpay_customer_id = $customer->id;
 
-        $this->save();
+        $this->saveRecord($this);
 
         return $customer;
     }
