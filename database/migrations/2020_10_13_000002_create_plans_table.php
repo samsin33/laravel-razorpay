@@ -16,12 +16,16 @@ class CreatePlansTable extends Migration
         Schema::create('plans', function (Blueprint $table) {
             $table->id();
             $table->string('razorpay_plan_id', 100)->nullable()->unique();
-            $table->string('entity');
-            $table->string('period', 100);
-            $table->integer('interval');
-            $table->text('request');
-            $table->text('response');
-            $table->ipAddress('ipaddress');
+            $table->string('name')->nullable();
+            $table->integer('amount')->nullable()->unsigned();
+            $table->string('currency')->nullable();
+            $table->string('period', 100)->nullable();
+            $table->integer('interval')->nullable();
+            $table->string('entity')->nullable();
+            $table->text('description')->nullable();
+            $table->text('request')->nullable();
+            $table->text('response')->nullable();
+            $table->ipAddress('ipaddress')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

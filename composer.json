@@ -1,7 +1,7 @@
 {
     "name": "samsin33/laravel-razorpay",
     "description": "Laravel razorpay provides support for Laravel with Razorpay.",
-    "keywords": ["laravel", "razorpay", "cashier"],
+    "keywords": ["laravel", "razorpay", "billing"],
     "license": "MIT",
     "support": {
         "issues": "https://github.com/samsin33/laravel-razorpay/issues",
