@@ -35,7 +35,7 @@ trait ManagesCustomer
      */
     public function hasRazorpayCustomerId()
     {
-        return ! is_null($this->razorpay_id);
+        return ! is_null($this->razorpay_customer_id);
     }
 
     /**
