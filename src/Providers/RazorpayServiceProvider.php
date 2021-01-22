@@ -39,7 +39,7 @@ class RazorpayServiceProvider extends ServiceProvider
     protected function configure()
     {
         $this->mergeConfigFrom(
-            __DIR__.'/../config/razorpay.php', 'razorpay'
+            __DIR__.'/../../config/razorpay.php', 'razorpay'
         );
     }
 
@@ -53,23 +53,12 @@ class RazorpayServiceProvider extends ServiceProvider
         if (Razorpay::$registersRoutes) {
             Route::group([
                 'prefix' => config('razorpay.path'),
-                'namespace' => 'Laravel\Razorpay\Http\Controllers',
+                'namespace' => 'Samsin33\Razorpay\Http\Controllers',
                 'as' => 'razorpay.',
             ], function () {
-                $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
+                $this->loadRoutesFrom(__DIR__.'/../../routes/api.php');
             });
         }
-    }
-
-    /**
-     * Register the package resources.
-     *
-     * @return void
-     */
-    protected function registerResources()
-    {
-        $this->loadJsonTranslationsFrom(__DIR__.'/../resources/lang');
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'razorpay');
     }
 
     /**
@@ -80,7 +69,7 @@ class RazorpayServiceProvider extends ServiceProvider
     protected function registerMigrations()
     {
         if (Razorpay::$runsMigrations && $this->app->runningInConsole()) {
-            $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+            $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
         }
     }
 
@@ -93,16 +82,12 @@ class RazorpayServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__.'/../config/razorpay.php' => $this->app->configPath('razorpay.php'),
+                __DIR__.'/../../config/razorpay.php' => $this->app->configPath('razorpay.php'),
             ], 'razorpay-config');
 
             $this->publishes([
-                __DIR__.'/../database/migrations' => $this->app->databasePath('migrations'),
+                __DIR__.'/../../database/migrations' => $this->app->databasePath('migrations'),
             ], 'razorpay-migrations');
-
-            $this->publishes([
-                __DIR__.'/../resources/views' => $this->app->resourcePath('views/vendor/razorpay'),
-            ], 'razorpay-views');
         }
     }
 }
