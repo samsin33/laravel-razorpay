@@ -52,7 +52,7 @@ RAZORPAY_MODEL=App\Models\User
 Razorpay assumes your order model will be the App\Models\Order class that ships with Laravel. If you wish to change this you can specify a different model in your .env file:
 
 ```bash
-RAZORPAY_Order_MODEL=App\Models\Order
+RAZORPAY_ORDER_MODEL=App\Models\Order
 ```
 
 Next, you should configure your Razorpay API keys in your application's .env file. You can retrieve your Razorpay API keys from the Razorpay control panel:
@@ -79,4 +79,62 @@ class User extends Authenticatable
 {
     use Billable;
 }
+```
+
+Before using Razorpay, add the Orderable trait to your order model definition. Typically, this will be the App\Models\Order model. This trait provides various methods to allow you to perform common tasks, such as fatching, creating and updating order method information:
+
+```bash
+use Laravel\Razorpay\Orderable;
+
+class Order extends Model
+{
+    use Orderable;
+}
+```
+
+## Customers
+
+### Retrieving Customers
+You can retrieve a customer by their Razorpay ID using the Razorpay::findBillable method. This method will return an instance of the billable model:
+
+```bash
+use Laravel\Razorpay\Razorpay;
+
+$user = Razorpay::findBillable($razorpayId);
+```
+
+### Creating Customers
+
+You can create a Razorpay customer by using the createRazorpayCustomer method in a billable model:
+
+```bash
+$razorpay_customer = $user->createRazorpayCustomer($options);
+```
+
+You may use the getRazorpayCustomer method if you want to return the Razorpay customer object for a billable model:
+
+```bash
+$razorpay_customer = $user->getRazorpayCustomer();
+```
+
+## Orders
+
+### Creating Orders
+
+You can create a Razorpay order by using the createRazorpayOrder method in a orderable model:
+
+```bash
+$razorpay_order = $user->createRazorpayOrder($options);
+```
+
+You may use the getRazorpayOrder method if you want to return the Razorpay orders for a orderable model:
+
+```bash
+$razorpay_customer = $user->getRazorpayOrder();
+```
+
+You may use the getRazorpayOrderPayments method if you want to return the Razorpay order payments for a orderable model:
+
+```bash
+$razorpay_customer = $user->getRazorpayOrderPayments();
 ```
