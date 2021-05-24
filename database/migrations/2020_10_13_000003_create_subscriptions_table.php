@@ -13,7 +13,7 @@ class CreateSubscriptionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('subscriptions', function (Blueprint $table) {
+        Schema::connection(config('razorpay.db_connection'))->create('subscriptions', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('plan_id')->unsigned()->unique()->nullable();
             $table->string('razorpay_subscription_id', 100)->nullable()->unique();
@@ -38,6 +38,6 @@ class CreateSubscriptionsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('plans');
+        Schema::connection(config('razorpay.db_connection'))->drop('plans');
     }
 }

@@ -70,6 +70,14 @@ trait ManagesCustomer
             $options['email'] = $email;
         }
 
+        if (!isset($options['name']) || empty($options['name'])) {
+            $options['name'] = $this->name ?? '';
+        }
+
+        if (!isset($options['contact']) || empty($options['contact'])) {
+            $options['contact'] = $this->mobile ?? $this->contact ?? '';
+        }
+
         // Here we will create the customer instance on Razorpay and store the ID of the
         // user from Razorpay. This ID will correspond with the Razorpay user instances.
         $api = new CustomerApi();
@@ -77,7 +85,7 @@ trait ManagesCustomer
 
         $this->razorpay_customer_id = $customer->id;
 
-        $this->saveRecord($this);
+        $this->saveQuietly();
 
         return $customer;
     }

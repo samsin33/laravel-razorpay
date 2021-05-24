@@ -7,6 +7,5 @@ use Samsin33\Razorpay\Traits\ManagesOrder;
 
 trait Orderable
 {
-    use CommonTrait;
     use ManagesOrder;
 }

@@ -6,6 +6,14 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateCustomerColumns extends Migration
 {
+    private $table;
+
+    public function __construct()
+    {
+        $model = config('razorpay.model');
+        $this->table = (new $model)->getTable();
+    }
+
     /**
      * Run the migrations.
      *
@@ -13,9 +21,7 @@ class CreateCustomerColumns extends Migration
      */
     public function up()
     {
-        $model = config('razorpay.model');
-        $table = (new $model)->getTable();
-        Schema::connection(config('razorpay.db_connection'))->table($table, function (Blueprint $table) {
+        Schema::connection(config('razorpay.db_connection'))->table($this->table, function (Blueprint $table) {
             $table->string('razorpay_customer_id')->nullable()->index();
         });
     }
@@ -26,5 +32,11 @@ class CreateCustomerColumns extends Migration
      * @return void
      */
     public function down()
-    {}
+    {
+        Schema::connection(config('razorpay.db_connection'))->table($this->table, function (Blueprint $table) {
+            $table->dropColumn([
+                'razorpay_customer_id',
+            ]);
+        });
+    }
 }

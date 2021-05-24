@@ -88,12 +88,19 @@ trait ManagesOrder
             throw OrderException::exists($this);
         }
 
-        if (! array_key_exists('amount', $options) || !(isset($options['amount']) && $options['amount'] > 0)) {
-            throw InvalidAmount::wrongAmount();
+        if (!(isset($options['amount']) && $options['amount'] > 0)) {
+            $options['amount'] = $this->amount ?? 0;
+            if (!($options['amount'] > 0)) {
+                throw InvalidAmount::wrongAmount();
+            }
         }
 
         if (! array_key_exists('currency', $options)) {
             $options['currency'] = $this->getCurrency();
+        }
+
+        if (! array_key_exists('receipt', $options)) {
+            $options['receipt'] = $this->id ?? '';
         }
 
         // Here we will create the order instance on Razorpay and store the ID of the
@@ -104,7 +111,7 @@ trait ManagesOrder
 
         $this->razorpay_order_id = $order->id;
 
-        $this->saveRecord($this);
+        $this->saveQuietly();
 
         return $order;
     }

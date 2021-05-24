@@ -7,6 +7,5 @@ use Samsin33\Razorpay\Traits\ManagesCustomer;
 
 trait Billable
 {
-    use CommonTrait;
     use ManagesCustomer;
 }
