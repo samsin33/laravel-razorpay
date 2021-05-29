@@ -38,6 +38,6 @@ class CreateSubscriptionsTable extends Migration
      */
     public function down()
     {
-        Schema::connection(config('razorpay.db_connection'))->drop('plans');
+        Schema::connection(config('razorpay.db_connection'))->drop('subscriptions');
     }
 }

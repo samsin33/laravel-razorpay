@@ -1,11 +1,11 @@
-<button id="rzp-button1">Pay</button>
+<button id="rzp-button">Pay</button>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
     var options = {
         "key": "{{ config('razorpay.key') }}", // Enter the Key ID generated from the Dashboard
         "amount": "{{ $amount }}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
         "currency": "{{ $currency }}",
-        "name": "{{ $name }}",
+        "name": "{{ $name ?? config('app.name') }}",
         "description": "{{ $description }}",
         "image": "{{ $image_url }}",
         "order_id": {{ $order_id }}, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
@@ -32,7 +32,7 @@
         alert(response.error.metadata.order_id);
         alert(response.error.metadata.payment_id);
     });
-    document.getElementById('rzp-button1').onclick = function(e){
+    document.getElementById('rzp-button').onclick = function(e){
         rzp1.open();
         e.preventDefault();
     }

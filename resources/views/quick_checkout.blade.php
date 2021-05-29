@@ -1,4 +1,4 @@
-<form action="https://www.example.com/payment/success/" method="POST">
+<form action="{{ $route }}" method="POST">
     <script src="https://checkout.razorpay.com/v1/checkout.js"
     data-key="{{ config('razorpay.key') }}"
     data-amount="{{ $amount }}"
@@ -7,7 +7,7 @@
     data-buttontext="{{ $btn_text ?? 'Pay' }}"
     data-name="{{ $name ?? config('app.name') }}"
     data-description="{{ $description }}"
-    data-image="{{ $image }}"
+    data-image="{{ $image_url }}"
     data-customer_id="{{ $razorpay_customer_id }}"
     data-theme.color="#F37254"
     ></script>
