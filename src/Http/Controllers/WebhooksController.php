@@ -18,8 +18,8 @@ class WebhooksController extends Controller
         $signature = $request->header('x-razorpay-signature');
         $ord_id = $request->payload->payment->entity->order_id ?? '';
         $model = config('razorpay.order_model');
-        $ord = $model::where('rzp_order_id', $ord_id)->where('rzp_payment_id', $pay_id)->firstOrFail();
-        $ord_payment = $ord->rzpOrderPayment()->first();
+        $ord = $model::where('rzp_order_id', $ord_id)->firstOrFail();
+        $ord_payment = $ord->rzpOrderPayment()->where('rzp_payment_id', $pay_id)->first();
         $webhook = [
             'rzp_payment_id' => $pay_id,
             'rzp_signature' => $signature,
