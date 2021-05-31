@@ -15,7 +15,7 @@ trait ManagesCustomer
      */
     public function razorpayCustomerId()
     {
-        return $this->razorpay_customer_id;
+        return $this->rzp_customer_id;
     }
 
     /**
@@ -35,7 +35,7 @@ trait ManagesCustomer
      */
     public function hasRazorpayCustomerId()
     {
-        return ! is_null($this->razorpay_customer_id);
+        return ! is_null($this->rzp_customer_id);
     }
 
     /**
@@ -83,7 +83,7 @@ trait ManagesCustomer
         $api = new CustomerApi();
         $customer = $api->createCustomer($options);
 
-        $this->razorpay_customer_id = $customer->id;
+        $this->rzp_customer_id = $customer->id;
 
         $this->saveQuietly();
 

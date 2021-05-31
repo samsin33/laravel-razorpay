@@ -56,7 +56,6 @@ return [
 
     'webhook' => [
         'secret' => env('RAZORPAY_WEBHOOK_SECRET'),
-        'tolerance' => env('RAZORPAY_WEBHOOK_TOLERANCE', 300),
     ],
 
     /*

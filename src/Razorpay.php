@@ -60,7 +60,7 @@ class Razorpay
 
         $model = config('razorpay.model');
 
-        return (new $model)->where('razorpay_customer_id', $razorpay_id)->first();
+        return (new $model)->where('rzp_customer_id', $razorpay_id)->first();
     }
 
     /**

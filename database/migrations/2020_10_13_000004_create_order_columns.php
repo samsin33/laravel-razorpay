@@ -22,7 +22,7 @@ class CreateOrderColumns extends Migration
     public function up()
     {
         Schema::connection(config('razorpay.db_connection'))->table($this->table, function (Blueprint $table) {
-            $table->string('razorpay_order_id', 100)->nullable()->index();
+            $table->string('rzp_order_id', 100)->nullable()->unique()->index();
         });
     }
 
@@ -35,7 +35,7 @@ class CreateOrderColumns extends Migration
     {
         Schema::connection(config('razorpay.db_connection'))->table($this->table, function (Blueprint $table) {
             $table->dropColumn([
-                'razorpay_order_id',
+                'rzp_order_id',
             ]);
         });
     }

@@ -5,13 +5,13 @@ namespace Samsin33\Razorpay\Models;
 use Illuminate\Database\Eloquent\Model;
 use Samsin33\Razorpay\Services\SubscriptionApi;
 
-class Plan extends Model
+class RzpPlan extends Model
 {
-    protected $fillable = ['razorpay_plan_id', 'name', 'amount', 'currency', 'period', 'interval', 'entity', 'description', 'request', 'response'];
-    protected $visible = ['id', 'razorpay_plan_id', 'name', 'amount', 'currency', 'period', 'interval', 'entity', 'description',
-        'request', 'response', 'ipaddress', 'created_by', 'updated_at', 'razorpay_plan', 'subscriptions'];
+    protected $fillable = ['rzp_plan_id', 'name', 'amount', 'currency', 'period', 'interval', 'entity', 'description', 'request', 'response'];
+    protected $visible = ['id', 'rzp_plan_id', 'name', 'amount', 'currency', 'period', 'interval', 'entity', 'description',
+        'request', 'response', 'ipaddress', 'created_by', 'updated_at', 'rzp_plan', 'subscriptions'];
 
-    protected $appends = ['razorpay_plan'];
+    protected $appends = ['rzp_plan'];
 
     private $save_request = true;
     private $save_response = true;
@@ -27,7 +27,7 @@ class Plan extends Model
     }
 
     //-------------------- Accessor --------------------------
-    public function getRazorpayPlanAttribute()
+    public function getRzpPlanAttribute()
     {
         return $this->getRazorpayPlan();
     }
@@ -63,7 +63,7 @@ class Plan extends Model
             $this->response = $plan_response;
         }
         $this->entity = $plan_response->entity;
-        $this->razorpay_plan_id = $plan_response->plan_id;
+        $this->rzp_plan_id = $plan_response->plan_id;
         $this->save();
         return $this;
     }
@@ -71,6 +71,6 @@ class Plan extends Model
     public function getRazorpayPlan()
     {
         $subscription_api = new SubscriptionApi();
-        return $subscription_api->getSubscription($this->razorpay_plan_id);
+        return $subscription_api->getSubscription($this->rzp_plan_id);
     }
 }

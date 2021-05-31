@@ -14,7 +14,7 @@ class OrderException extends Exception
      */
     public static function exists($order)
     {
-        return new static(class_basename($order)." is already a Razorpay order with ID {$order->razorpay_order_id}.");
+        return new static(class_basename($order)." is already a Razorpay order with ID {$order->rzp_order_id}.");
     }
 
     public static function notExists($order)

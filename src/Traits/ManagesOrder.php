@@ -50,7 +50,7 @@ trait ManagesOrder
      */
     public function razorpayOrderId()
     {
-        return $this->razorpay_order_id;
+        return $this->rzp_order_id;
     }
 
     /**
@@ -60,7 +60,7 @@ trait ManagesOrder
      */
     public function hasRazorpayOrderId()
     {
-        return ! is_null($this->razorpay_order_id);
+        return ! is_null($this->rzp_order_id);
     }
 
     /**
@@ -109,7 +109,7 @@ trait ManagesOrder
         $api = new OrderApi();
         $order = $api->createOrder($options);
 
-        $this->razorpay_order_id = $order->id;
+        $this->rzp_order_id = $order->id;
 
         $this->saveQuietly();
 

@@ -5,11 +5,11 @@ namespace Samsin33\Razorpay\Models;
 use Illuminate\Database\Eloquent\Model;
 use Samsin33\Razorpay\Services\SubscriptionApi;
 
-class Subscription extends Model
+class RzpSubscription extends Model
 {
-    protected $fillable = ['plan_id', 'razorpay_subscription_id', 'razorpay_plan_id', 'total_count', 'customer_notify', 'quantity', 'start_at',
+    protected $fillable = ['plan_id', 'rzp_subscription_id', 'rzp_plan_id', 'total_count', 'customer_notify', 'quantity', 'start_at',
         'expired_by', 'request', 'response'];
-    protected $visible = ['id', 'plan_id', 'razorpay_subscription_id', 'razorpay_plan_id', 'total_count', 'customer_notify', 'quantity', 'start_at',
+    protected $visible = ['id', 'plan_id', 'rzp_subscription_id', 'rzp_plan_id', 'total_count', 'customer_notify', 'quantity', 'start_at',
         'expired_by', 'request', 'response', 'ipaddress', 'razorpay_subscription', 'plan', 'created_at', 'updated_at'];
 
     protected $appends = ['razorpay_subscription'];
@@ -42,7 +42,7 @@ class Subscription extends Model
     public function apiRequest()
     {
         return [
-            'plan_id' => $this->plan->razorpay_plan_id,
+            'plan_id' => $this->plan->rzp_plan_id,
             'total_count' => $this->period,
             'quantity' => $this->interval,
             'customer_notify' => $this->customer_notify,
@@ -61,7 +61,7 @@ class Subscription extends Model
         if ($this->save_response) {
             $this->response = $subscription_response;
         }
-        $this->razorpay_subscription_id = $subscription_response->subscription_id;
+        $this->rzp_subscription_id = $subscription_response->subscription_id;
         $this->save();
         return $this;
     }
@@ -69,12 +69,12 @@ class Subscription extends Model
     public function saveAddon($addon)
     {
         $subscription_api = new SubscriptionApi();
-        return $subscription_api->createAddon($this->razorpay_subscription_id, $addon);
+        return $subscription_api->createAddon($this->rzp_subscription_id, $addon);
     }
 
     public function getRazorpaySubscription()
     {
         $subscription_api = new SubscriptionApi();
-        return $subscription_api->getSubscription($this->razorpay_subscription_id);
+        return $subscription_api->getSubscription($this->rzp_subscription_id);
     }
 }
