@@ -41,7 +41,7 @@ return [
     |
     */
 
-    'db_connection' => env('RAZORPAY_CONNECTION', 'mysql'),
+    'db_connection' => env('RAZORPAY_CONNECTION', env('DB_CONNECTION', 'mysql')),
 
     /*
     |--------------------------------------------------------------------------
