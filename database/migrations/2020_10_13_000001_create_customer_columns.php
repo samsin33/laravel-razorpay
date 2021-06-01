@@ -22,7 +22,7 @@ class CreateCustomerColumns extends Migration
     public function up()
     {
         Schema::connection(config('razorpay.db_connection'))->table($this->table, function (Blueprint $table) {
-            $table->string('rzp_customer_id', 100)->unique()->nullable()->index();
+            $table->string('rzp_customer_id', 120)->unique()->nullable()->index();
         });
     }
 

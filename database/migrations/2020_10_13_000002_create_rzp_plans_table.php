@@ -15,11 +15,11 @@ class CreateRzpPlansTable extends Migration
     {
         Schema::connection(config('razorpay.db_connection'))->create('rzp_plans', function (Blueprint $table) {
             $table->id();
-            $table->string('rzp_plan_id', 100)->nullable()->unique();
+            $table->string('rzp_plan_id', 120)->nullable()->unique();
             $table->string('name')->nullable();
             $table->integer('amount')->nullable()->unsigned();
             $table->string('currency')->nullable();
-            $table->string('period', 100)->nullable();
+            $table->string('period', 120)->nullable();
             $table->integer('interval')->nullable();
             $table->string('entity')->nullable();
             $table->text('description')->nullable();

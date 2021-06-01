@@ -4,8 +4,9 @@ namespace Samsin33\Razorpay\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
+use Samsin33\Razorpay\Services\PaymentApi;
 
-class RzpOrderPayments extends Model
+class RzpOrderPayment extends Model
 {
     protected $fillable = ['order_id', 'rzp_payment_id', 'rzp_signature', 'status', 'data', 'ipaddress'];
     protected $visible = ['id', 'order_id', 'rzp_payment_id', 'rzp_signature', 'status', 'data', 'ipaddress',
@@ -23,5 +24,12 @@ class RzpOrderPayments extends Model
     public function order(): BelongsTo
     {
         return $this->belongsTo(config('razorpay.order_model'), 'order_id', 'id');
+    }
+
+    //--------------------- Other Functions ----------------------------
+    public function verifyWebhook()
+    {
+        $payment = new PaymentApi();
+        return $payment->verifyWebhookSignature($this->data, $this->rzp_signature);
     }
 }

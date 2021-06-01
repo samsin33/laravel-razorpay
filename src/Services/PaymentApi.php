@@ -21,6 +21,6 @@ class PaymentApi extends RazorpayApi
 
     public function verifyWebhookSignature($webhook_body, $webhook_signature, $webhook_secret = null)
     {
-        $this->api->utility->verifyWebhookSignature($webhook_body, $webhook_signature, (!empty($webhook_secret) ? $webhook_secret : config('razorpay.webhook.secret')));
+        return $this->api->utility->verifyWebhookSignature($webhook_body, $webhook_signature, (!empty($webhook_secret) ? $webhook_secret : config('razorpay.webhook.secret')));
     }
 }

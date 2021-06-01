@@ -2,12 +2,12 @@
 
 namespace Samsin33\Razorpay\Traits;
 
-use Samsin33\Razorpay\Models\RzpOrderPayments;
+use Samsin33\Razorpay\Models\RzpOrderPayment;
 
 trait ManageOrderPayment
 {
-    public function rzpOrderPayment()
+    public function rzpOrderPayments()
     {
-        return $this->hasMany(RzpOrderPayments::class, 'order_id', 'id');
+        return $this->hasMany(RzpOrderPayment::class, 'order_id', 'id');
     }
 }

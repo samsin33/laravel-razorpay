@@ -16,8 +16,8 @@ class CreateRzpSubscriptionsTable extends Migration
         Schema::connection(config('razorpay.db_connection'))->create('rzp_subscriptions', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('plan_id')->unsigned()->unique()->nullable();
-            $table->string('rzp_subscription_id', 100)->nullable()->unique();
-            $table->string('rzp_plan_id', 100)->nullable()->unique();
+            $table->string('rzp_subscription_id', 120)->nullable()->unique();
+            $table->string('rzp_plan_id', 120)->nullable()->unique();
             $table->integer('total_count')->nullable();
             $table->integer('customer_notify')->nullable();
             $table->integer('quantity')->nullable();
