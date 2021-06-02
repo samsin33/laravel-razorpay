@@ -29,7 +29,7 @@
         "moneyphp/money": "^3.2",
         "nesbot/carbon": "^2.0",
         "nyholm/psr7": "^1.0",
-        "phpseclib/phpseclib": "^2.0",
+        "phpseclib/phpseclib": "^2.0|^3.0",
         "razorpay/razorpay": "^2.7",
         "symfony/http-kernel": "^4.3|^5.0",
         "symfony/intl": "^4.3|^5.0"
