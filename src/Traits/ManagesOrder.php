@@ -110,6 +110,7 @@ trait ManagesOrder
         $order = $api->createOrder($options);
 
         $this->rzp_order_id = $order->id;
+        $this->rzp_status = $order->status;
 
         $this->saveQuietly();
 
