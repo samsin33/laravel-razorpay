@@ -30,7 +30,7 @@ class WebhooksController extends Controller
             $ord_payment = new RzpOrderPayment($webhook);
             $ord->rzpOrderPayments()->save($ord_payment);
         } else {
-            if ($ord_payment->status != 'captured' && $ord_payment->status != 'failed') {
+            if ($ord_payment->status != 'authorized') {
                 $ord_payment->update($webhook);
             }
         }
