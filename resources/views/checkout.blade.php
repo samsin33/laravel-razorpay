@@ -9,21 +9,18 @@
         "description": "{{ $description }}",
         "image": "{{ $image_url }}",
         "order_id": {{ $order_id }}, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-        "handler": function (response){
-        },
         "customer_id": "{{ $customer_id }}",
+        "callback_url": "{{ $callback_url }}",
         "notes": {
-            "address": "Razorpay Corporate Office"
+            "address": "{{ $address ?? '' }}"
         },
         "theme": {
             "color": "#3399cc"
         }
     };
-    var rzp1 = new Razorpay(options);
-    rzp1.on('payment.failed', function (response){
-    });
+    var rzp = new Razorpay(options);
     document.getElementById('rzp-button').onclick = function(e){
-        rzp1.open();
+        rzp.open();
         e.preventDefault();
     }
 </script>
