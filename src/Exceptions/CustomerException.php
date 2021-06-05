@@ -14,7 +14,7 @@ class CustomerException extends Exception
      */
     public static function exists($owner)
     {
-        return new static(class_basename($owner)." is already a Razorpay order with ID {$owner->razorpay_customer_id}.");
+        return new static(class_basename($owner)." is already a Razorpay customer with ID {$owner->rzp_customer_id}.");
     }
 
     /**

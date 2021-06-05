@@ -50,7 +50,7 @@ trait ManagesOrder
      */
     public function razorpayOrderId()
     {
-        return $this->razorpay_order_id;
+        return $this->rzp_order_id;
     }
 
     /**
@@ -60,7 +60,7 @@ trait ManagesOrder
      */
     public function hasRazorpayOrderId()
     {
-        return ! is_null($this->razorpay_order_id);
+        return ! is_null($this->rzp_order_id);
     }
 
     /**
@@ -88,12 +88,19 @@ trait ManagesOrder
             throw OrderException::exists($this);
         }
 
-        if (! array_key_exists('amount', $options) || !(isset($options['amount']) && $options['amount'] > 0)) {
-            throw InvalidAmount::wrongAmount();
+        if (!(isset($options['amount']) && $options['amount'] > 0)) {
+            $options['amount'] = $this->amount ?? 0;
+            if (!($options['amount'] > 0)) {
+                throw InvalidAmount::wrongAmount();
+            }
         }
 
         if (! array_key_exists('currency', $options)) {
             $options['currency'] = $this->getCurrency();
+        }
+
+        if (! array_key_exists('receipt', $options)) {
+            $options['receipt'] = $this->id ?? '';
         }
 
         // Here we will create the order instance on Razorpay and store the ID of the
@@ -102,9 +109,10 @@ trait ManagesOrder
         $api = new OrderApi();
         $order = $api->createOrder($options);
 
-        $this->razorpay_order_id = $order->id;
+        $this->rzp_order_id = $order->id;
+        $this->rzp_status = $order->status;
 
-        $this->saveRecord($this);
+        $this->saveQuietly();
 
         return $order;
     }

@@ -9,14 +9,14 @@ class Razorpay
      *
      * @var string
      */
-    const VERSION = '1.0.0';
+    const VERSION = '2.0.0';
 
     /**
      * The Razorpay API version.
      *
      * @var string
      */
-    const RAZORPAY_VERSION = '2020-10-13';
+    const RAZORPAY_VERSION = '2021-05-26';
 
     /**
      * The custom currency formatter.
@@ -60,7 +60,7 @@ class Razorpay
 
         $model = config('razorpay.model');
 
-        return (new $model)->where('razorpay_customer_id', $razorpay_id)->first();
+        return (new $model)->where('rzp_customer_id', $razorpay_id)->first();
     }
 
     /**

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSubscriptionsTable extends Migration
+class CreateRzpSubscriptionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateSubscriptionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('subscriptions', function (Blueprint $table) {
+        Schema::connection(config('razorpay.db_connection'))->create('rzp_subscriptions', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('plan_id')->unsigned()->unique()->nullable();
-            $table->string('razorpay_subscription_id', 100)->nullable()->unique();
-            $table->string('razorpay_plan_id', 100)->nullable()->unique();
+            $table->string('rzp_subscription_id', 120)->nullable()->unique();
+            $table->string('rzp_plan_id', 120)->nullable()->unique();
             $table->integer('total_count')->nullable();
             $table->integer('customer_notify')->nullable();
             $table->integer('quantity')->nullable();
@@ -38,6 +38,6 @@ class CreateSubscriptionsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('plans');
+        Schema::connection(config('razorpay.db_connection'))->drop('rzp_subscriptions');
     }
 }

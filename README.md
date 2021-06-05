@@ -13,7 +13,7 @@ $ composer require samsin33/laravel-razorpay
 It uses razorpay/razorpay package and will be installed automatically.
 
 ## Database Migration
-Razorpay service provider registers its own database migration directory, so remember to migrate your database after installing the package. The Cashier migrations will add several columns to your customers and orders table as well as create new plans and subscriptions table to hold all of your customer's subscriptions:
+Razorpay service provider registers its own database migration directory, so remember to migrate your database after installing the package. The Razorpay migrations will add several columns to your customers and orders table as well as create new plans and subscriptions table to hold all of your customer's subscriptions:
 
 ```bash
 $ php artisan migrate
@@ -65,7 +65,7 @@ RAZORPAY_SECRET=your-razorpay-secret
 The default razorpay currency is Indian Rupee (INR). You can change the default currency by setting the RAZORPAY_CURRENCY environment variable within your application's .env file:
 
 ```bash
-CASHIER_CURRENCY=INR
+RAZORPAY_CURRENCY=INR
 ```
 
 ## Model Configuration

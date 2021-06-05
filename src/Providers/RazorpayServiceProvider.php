@@ -18,6 +18,7 @@ class RazorpayServiceProvider extends ServiceProvider
         $this->registerRoutes();
         $this->registerMigrations();
         $this->registerPublishing();
+        $this->registerResources();
     }
 
     /**
@@ -55,9 +56,20 @@ class RazorpayServiceProvider extends ServiceProvider
                 'namespace' => 'Samsin33\Razorpay\Http\Controllers',
                 'as' => 'razorpay.',
             ], function () {
+                $this->loadRoutesFrom(__DIR__.'/../../routes/web.php');
                 $this->loadRoutesFrom(__DIR__.'/../../routes/api.php');
             });
         }
+    }
+
+    /**
+     * Register the package resources.
+     *
+     * @return void
+     */
+    protected function registerResources()
+    {
+        $this->loadViewsFrom(__DIR__.'/../../resources/views', 'razorpay');
     }
 
     /**
@@ -87,6 +99,10 @@ class RazorpayServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__.'/../../database/migrations' => $this->app->databasePath('migrations'),
             ], 'razorpay-migrations');
+
+            $this->publishes([
+                __DIR__.'/../../resources/views' => $this->app->resourcePath('views/vendor/razorpay'),
+            ], 'razorpay-views');
         }
     }
 }

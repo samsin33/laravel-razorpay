@@ -41,7 +41,7 @@ return [
     |
     */
 
-    'db_connection' => env('RAZORPAY_CONNECTION', 'mysql'),
+    'db_connection' => env('RAZORPAY_CONNECTION', env('DB_CONNECTION', 'mysql')),
 
     /*
     |--------------------------------------------------------------------------
@@ -56,7 +56,6 @@ return [
 
     'webhook' => [
         'secret' => env('RAZORPAY_WEBHOOK_SECRET'),
-        'tolerance' => env('RAZORPAY_WEBHOOK_TOLERANCE', 300),
     ],
 
     /*
