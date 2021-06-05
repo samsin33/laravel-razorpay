@@ -69,7 +69,7 @@ class RazorpayServiceProvider extends ServiceProvider
      */
     protected function registerResources()
     {
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'cashier');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'razorpay');
     }
 
     /**
