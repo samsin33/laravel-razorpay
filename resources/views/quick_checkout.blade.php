@@ -9,7 +9,7 @@
     data-description="{{ $description }}"
     data-image="{{ $image_url }}"
     data-customer_id="{{ $rzp_customer_id }}"
-    data-theme.color="#F37254"
+    data-theme.color="{{ $color ?? '#F37254' }}"
     ></script>
     <input type="hidden" custom="Hidden Element" name="hidden">
 </form>
