@@ -69,7 +69,7 @@ class RazorpayServiceProvider extends ServiceProvider
      */
     protected function registerResources()
     {
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'razorpay');
+        $this->loadViewsFrom(__DIR__.'/../../resources/views', 'razorpay');
     }
 
     /**
@@ -101,7 +101,7 @@ class RazorpayServiceProvider extends ServiceProvider
             ], 'razorpay-migrations');
 
             $this->publishes([
-                __DIR__.'/../resources/views' => $this->app->resourcePath('views/vendor/razorpay'),
+                __DIR__.'/../../resources/views' => $this->app->resourcePath('views/vendor/razorpay'),
             ], 'razorpay-views');
         }
     }
